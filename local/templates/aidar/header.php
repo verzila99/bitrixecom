@@ -33,7 +33,6 @@
 			'<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700"
             rel="stylesheet">'
 		);
-		Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/style.css');
 		Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/vendor/bootstrap/css/bootstrap.min.css');
 		Asset::getInstance()->addCss(
 			SITE_TEMPLATE_PATH . '/vendor/font-awesome/css/font-awesome.min.css'
@@ -44,6 +43,7 @@
 		Asset::getInstance()->addCss(
 			SITE_TEMPLATE_PATH . '/vendor/owl.carousel/assets/owl.theme.default.css'
 		);
+		Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/style.css');
 		Asset::getInstance()->addCss(
 			SITE_TEMPLATE_PATH . '/css/custom.css'
 		);
@@ -272,3 +272,5 @@
 		</div>
 	</div>
 </header>
+<div id="all">
+	<div id="content">

@@ -6,7 +6,7 @@
 <?
 	$APPLICATION->IncludeComponent(
 		"bitrix:catalog",
-		"bootstrap_v4",
+		"aidar",
 		array(
 			"IBLOCK_TYPE" => "catalog",
 			// Тип инфоблока
@@ -32,7 +32,7 @@
 			// Включить поддержку ЧПУ
 			"SEF_FOLDER" => "/catalog/",
 			// Каталог ЧПУ (относительно корня сайта)
-			"AJAX_MODE" => "N",
+			"AJAX_MODE" => "Y",
 			// Включить режим AJAX
 			"AJAX_OPTION_JUMP" => "N",
 			// Включить прокрутку к началу компонента

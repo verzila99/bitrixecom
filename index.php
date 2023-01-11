@@ -3,8 +3,7 @@
 	require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 	$APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
 ?>
-<div id="all">
-	<div id="content">
+
 		<?
 			$APPLICATION->IncludeComponent(
 				"bitrix:news.list",
@@ -317,7 +316,6 @@
 					"STRICT_SECTION_CHECK" => "N"
 				)
 			); ?>
-	</div>
-</div>
+
 <br><?php
 	require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
