@@ -115,21 +115,28 @@
 				</div>
 				<div class="col-lg-6 text-center text-lg-right">
 					<ul class="menu list-inline mb-0">
-						<li class="list-inline-item">
-							<a
-								href="#" data-toggle="modal"
-								data-target="#login-modal">Login
-							</a>
-						</li>
-						<li class="list-inline-item">
-							<a href="register.html">Register</a>
-						</li>
-						<li class="list-inline-item">
-							<a href="contact.html">Contact</a>
-						</li>
-						<li class="list-inline-item">
-							<a href="#">Recently viewed</a>
-						</li>
+						<?$APPLICATION->IncludeComponent(
+							"bitrix:sale.basket.basket.line",
+							"auth",
+							Array(
+								"HIDE_ON_BASKET_PAGES" => "N",
+								"PATH_TO_AUTHORIZE" => SITE_DIR."login/",
+								"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
+								"PATH_TO_ORDER" => SITE_DIR."personal/order/make/",
+								"PATH_TO_PERSONAL" => SITE_DIR."personal/",
+								"PATH_TO_PROFILE" => SITE_DIR."personal/",
+								"PATH_TO_REGISTER" => SITE_DIR."register/",
+								"POSITION_FIXED" => "N",
+								"SHOW_AUTHOR" => "Y",
+								"SHOW_EMPTY_VALUES" => "Y",
+								"SHOW_NUM_PRODUCTS" => "N",
+								"SHOW_PERSONAL_LINK" => "Y",
+								"SHOW_PRODUCTS" => "N",
+								"SHOW_REGISTRATION" => "Y",
+								"SHOW_TOTAL_PRICE" => "N"
+							)
+						);?>
+						
 					</ul>
 				</div>
 			</div>
@@ -232,27 +239,24 @@
 							class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
 					<div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block">
 						<a
-							href="basket.html" class="btn btn-primary navbar-btn"><i
+							href="/personal/cart" class="btn btn-primary navbar-btn"><i
 								class="fa fa-shopping-cart"></i><span>
-								<?
-									$APPLICATION->IncludeComponent(
-										"bitrix:sale.basket.basket.line",
-										"basket_items",
-										array(
-											"PATH_TO_BASKET" => SITE_DIR . "personal/cart/",
-											"PATH_TO_PERSONAL" => SITE_DIR . "personal/",
-											"SHOW_PERSONAL_LINK" => "N",
-											"SHOW_NUM_PRODUCTS" => "Y",
-											"SHOW_TOTAL_PRICE" => "Y",
-											"SHOW_PRODUCTS" => "N",
-											"POSITION_FIXED" => "N",
-											"SHOW_AUTHOR" => "Y",
-											"PATH_TO_REGISTER" => SITE_DIR . "login/",
-											"PATH_TO_PROFILE" => SITE_DIR . "personal/"
-										),
-										false,
-										array()
-									); ?></span></a>
+								<?$APPLICATION->IncludeComponent(
+									"bitrix:sale.basket.basket.line",
+									"navbar",
+									Array(
+										"HIDE_ON_BASKET_PAGES" => "N",
+										"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
+										"POSITION_FIXED" => "N",
+										"SHOW_AUTHOR" => "N",
+										"SHOW_EMPTY_VALUES" => "Y",
+										"SHOW_NUM_PRODUCTS" => "Y",
+										"SHOW_PERSONAL_LINK" => "N",
+										"SHOW_PRODUCTS" => "N",
+										"SHOW_REGISTRATION" => "N",
+										"SHOW_TOTAL_PRICE" => "N"
+									)
+								);?></span></a>
 					</div>
 				</div>
 			</div>

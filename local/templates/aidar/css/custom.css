@@ -7,3 +7,18 @@ a {
     background-color: #4fbfa8;
     border: none;
 }
+
+.product  .img-fluid{
+    margin-top: 15px;
+    margin-bottom:15px;
+}
+.product-image, .product  .front{
+    display: flex;
+    justify-content: center;
+}
+.buttons .add-to-cart{
+    margin-left: 25px;
+}
+.price{
+    font-weight: 700;
+}

@@ -1,4 +1,4 @@
-<?
+<?php
 
 	if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 		die();
@@ -182,10 +182,10 @@
 
 ?>
 
-<div class="row<?= $themeClass ?>"> <?
+<div class="row<?= $themeClass ?>"> <?php
 		// wrapper ?>
 	<div class="col">
-		<?
+		<?php
 			//region Pagination
 			if ($showTopPager) {
 				?>
@@ -196,49 +196,104 @@
 						<!-- pagination-container -->
 					</div>
 				</div>
-				<?
+				<?php
 			}
 			//endregion
 
 			//region Description
-			if (($arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y') && !empty($arResult['DESCRIPTION'])) {
+			if (!empty($arResult['DESCRIPTION'])) {
 		?>
-		<div class="col-lg-9">
+		<div class="col">
 			<div class="box">
 				<h1><?= $arResult['NAME']; ?></h1>
 				<p><?= $arResult['DESCRIPTION']; ?>.
 				</p>
 			</div>
-			<div class="box info-bar">
-				<div class="row">
-					<div class="col-md-12 col-lg-4 products-showing">Showing <strong>12</strong> of
-						<strong>25</strong> products
-					</div>
-					<div class="col-md-12 col-lg-7 products-number-sort">
-						<form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
-							<div class="products-number"><strong>Show</strong>
-								<a href="#" class="btn btn-sm btn-primary">12</a>
-								<a href="#" class="btn btn-outline-secondary btn-sm">24</a>
-								<a href="#" class="btn btn-outline-secondary btn-sm">All</a>
-								<span>products</span></div>
-							<div class="products-sort-by mt-2 mt-lg-0"><strong>Sort by</strong>
-								<select name="sort-by" class="form-control">
-									<option>Price</option>
-									<option>Name</option>
-									<option>Sales first</option>
-								</select>
-							</div>
-						</form>
+		</div>
+				<?php
+			}
+			//endregion
+		?>
+			<div class="col">
+				<div class="box info-bar">
+					<div class="row">
+						<div class="col-md-12 col-lg-4 products-showing">Showing <strong>12</strong> of
+							<strong>25</strong> products
+						</div>
+						<div class="col-md-12 col-lg-7 products-number-sort">
+							<form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
+								<div class="products-number"><strong>Show</strong>
+									<a href="#" class="btn btn-sm btn-primary">12</a>
+									<a href="#" class="btn btn-outline-secondary btn-sm">24</a>
+									<a href="#" class="btn btn-outline-secondary btn-sm">All</a>
+									<span>products</span></div>
+								<div class="products-sort-by mt-2 mt-lg-0"><strong>Сортировать по:</strong>
+									<select class="form-select"
+													id="bitrix-sort"
+													aria-label="Default select bitrix-sort">
+										<option value="SORT-ASC"<?= !$_GET['sort'] ? 'selected' : ''; ?>>По
+																																										 умолчанию
+										</option>
+										<option value="NAME-ASC"<?= $_GET['sort']=='name' &&
+										$_GET['method']== 'asc'? 'selected' :
+											'';
+										?>>Алфавиту от
+											 А до Я
+										</option>
+										<option value="NAME-DESC"<?= $_GET['sort']=='name' &&
+										$_GET['method']== 'desc'? 'selected'
+											: '';
+										?>>Алфавиту
+											 от Я до А
+										</option>
+										<option value="PROPERTY_PRICE-ASC"<?= $_GET['sort']=='catalog_PRICE_1' &&
+
+										$_GET['method']== 'asc'?
+											'selected'
+											: ''; ?>>По возрастанию цены
+										</option>
+										<option value="PROPERTY_PRICE-DESC"<?= $_GET['sort']=='catalog_PRICE_1'
+										&&
+										$_GET['method']== 'desc'?
+											'selected'
+											: ''; ?>>По убыванию цены
+										</option>
+										<option value="TIMESTAMP_X-ASC"<?= $_GET['sort']=='timestamp_x' ? 'selected'
+											: ''; ?>>По дате обновления
+										</option>
+									</select>
+								</div>
+								<?php $server = $APPLICATION->GetCurPage(false);?>
+								<div style="display:none;">
+									<a id="SORT-ASC" href="<?= $server;?>">По умолчанию</a>
+									<a id="NAME-ASC" href="<?= $server;?>?sort=name&method=asc">Алфавиту от А до Я</a>
+									<a id="NAME-DESC" href="<?= $server;?>?sort=name&method=desc">Алфавиту от Я до А</a>
+									<a id="PROPERTY_PRICE-ASC" href="<?= $server;?>?sort=catalog_PRICE_1&method=asc">По
+																																																	 возрастанию цены</a>
+									<a id="PROPERTY_PRICE-DESC" href="<?= $server;?>?sort=catalog_PRICE_1&method=desc">По убыванию
+																																																		 цены</a>
+									<a id="TIMESTAMP_X-ASC" href="<?= $server;?>?sort=timestamp_x&method=desc">По дате
+																																														 обновления</a>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
+				<script>
+					BX.ready(function(){
+						BX.bind(
+							BX('bitrix-sort'), 'change', function() {
+								let selected =  this.value;
+								BX(selected).click();
+							}
+						);
+					});
+				</script>
 			</div>
-			<?
-				}
-				//endregion
-			?>
+		
 
 			<!-- items-container -->
-			<?
+			<?php
 				if (!empty($arResult['ITEMS'])) {
 					$areaIds = array();
 
@@ -260,7 +315,7 @@
 							foreach ($arResult['ITEMS'] as $rowData) {
 								?>
 								<div class="col-lg-4 col-md-6">
-									<?
+									<?php
 										$item = $rowData;
 										$APPLICATION->IncludeComponent(
 											'bitrix:catalog.item',
@@ -282,11 +337,11 @@
 											array('HIDE_ICONS' => 'Y')
 										); ?>
 								</div>
-							<?
+								<?php
 							}
 						?>
 					</div>
-					<?
+					<?php
 					unset($generalParams, $rowItems);
 				} else {
 					// load css for bigData/deferred load
@@ -300,7 +355,7 @@
 				}
 			?>
 			<!-- items-container -->
-			<?
+			<?php
 
 				//region LazyLoad Button
 				if ($showLazyLoad) {
@@ -313,7 +368,7 @@
 							<?= $arParams['MESS_BTN_LAZY_LOAD'] ?>
 						</button>
 					</div>
-					<?
+					<?php
 				}
 				//endregion
 
@@ -327,7 +382,7 @@
 							<!-- pagination-container -->
 						</div>
 					</div>
-					<?
+					<?php
 				}
 				//endregion
 
@@ -388,6 +443,6 @@
 
 		</div>
 	</div>
-</div> <?
+</div> <?php
 	//end wrapper?>
 <!-- component-end -->

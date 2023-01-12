@@ -46,7 +46,7 @@
 				}
 				$APPLICATION->IncludeComponent(
 					"bitrix:catalog.section.list",
-					"bootstrap_v4",
+					"aidar",
 					$sectionListParams,
 					$component,
 					($arParams["SHOW_TOP_ELEMENTS"] !== "N" ? array("HIDE_ICONS" => "Y") : array())

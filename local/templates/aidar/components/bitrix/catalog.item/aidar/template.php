@@ -21,7 +21,6 @@
 	if ($arResult['ITEM']):
 		?>
 
-
 		<div class="product">
 			<div class="flip-container">
 				<div class="flipper">
@@ -30,13 +29,16 @@
 							<img src="<?= $arResult['ITEM']['DETAIL_PICTURE']['SRC']; ?>"
 									 alt=""
 									 class="img-fluid"
-									 style="height: 300px;width: auto;">
+									 style="height: 200px;width: auto;">
 						</a>
 					</div>
 				</div>
 			</div>
 			<a href="<?= $arResult['ITEM']['DETAIL_PAGE_URL']; ?>" class="invisible">
-
+				<img src="<?= $arResult['ITEM']['DETAIL_PICTURE']['SRC']; ?>"
+						 alt=""
+						 class="img-fluid"
+						 style="height: 200px;width: auto;">
 			</a>
 			<div class="text">
 				<h3>
@@ -45,11 +47,14 @@
 				</h3>
 				<p class="price">
 					<del></del>
-					<?php
-						$numbers = array_column($arResult['ITEM']['OFFERS'], 'ITEM_PRICES');
-						$min = min($numbers[0]['BASE_PRICE']);
-						echo $min;
-					?>
+					<strong><?php
+
+							$numbers = array_map(fn($el)=>$el['ITEM_PRICES'][0]['BASE_PRICE'],
+								$arResult['ITEM']['OFFERS'] );
+
+							$min = min($numbers);
+							echo $min;
+						?> .р</strong>
 				</p>
 				<p class="buttons">
 					<a href="<?= $arResult['ITEM']['DETAIL_PAGE_URL']; ?>" class="btn
