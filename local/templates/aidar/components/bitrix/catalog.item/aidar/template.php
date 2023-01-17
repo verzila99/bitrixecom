@@ -19,12 +19,14 @@
 
 <?php
 	if ($arResult['ITEM']):
+
 		$colorsArray = array_unique(
 			array_map(fn($el) => $el['PROPERTIES']['COLOR_REF']['VALUE'],
 				$arResult['ITEM']['OFFERS'])
 		);
+		$typeOfClothe = strtoupper($arResult['ITEM']['IBLOCK_CODE']);
 		$sizesArray = array_unique(
-			array_map(fn($el) => $el['PROPERTIES']['SIZES_SHOES']['VALUE'],
+			array_map(fn($el) => $el['PROPERTIES']['SIZES_' . $typeOfClothe]['VALUE'],
 				$arResult['ITEM']['OFFERS'])
 		);
 		?>
@@ -76,8 +78,10 @@
 							<?php
 							if (in_array($key, array_keys($colorsArray))): ?>
 
-								<a href="" data-key="<?= $key; ?>" data-id="<?= $item['ID']; ?>"
-									 class="product-color-link d-flex
+								<div data-key="<?= $key; ?>"
+										 data-id="<?= $arResult['ITEM']['ID']; ?>"
+										 data-offerid="<?= $item['ID']; ?>"
+										 class="product-color-link d-flex
 								justify-content-center align-items-center">
 									<img
 										class="<?= $key == array_search($key, $colorsArray) ?
@@ -87,7 +91,7 @@
 											echo $arParams['~SKU_PROPS']['COLOR_REF']['VALUES'][$colorID]['PICT']['SRC'];
 										?>"
 										alt="<?= $arParams['~SKU_PROPS']['COLOR_REF']['VALUES'][$colorID]['NAME']; ?>">
-								</a>
+								</div>
 							<?php
 							endif; ?>
 
@@ -99,20 +103,26 @@
 
 					<?php
 						foreach ($arResult['ITEM']['OFFERS'] as $key => $item): ?>
-							<div class="d-none offers-data-color" data-color="<?=
-								$item['PROPERTIES']['COLOR_REF']['VALUE']; ?>"></div>
-							<div class="d-none offers-data-size" data-size="<?=
-								$item['PROPERTIES']['SIZES_SHOES']['VALUE'];
-							?>"></div>
+							<div class="d-none offers-data"
+									 data-color="<?= $item['PROPERTIES']['COLOR_REF']['VALUE']; ?>"
+									 data-size="<?= $item['PROPERTIES']['SIZES_' . $typeOfClothe]['VALUE']; ?>"
+									 data-offerid="<?= $item['ID']; ?>"
+									 data-id="<?= $arResult['ITEM']['ID']; ?>"
+									 data-price="<?= $item['ITEM_PRICES'][0]['BASE_PRICE']; ?>"
+							>
+							</div>
+
 
 							<?php
 							if (in_array($key, array_keys($sizesArray))): ?>
-								<button data-key="<?= $key; ?>" data-id="<?= $item['ID']; ?>"
+								<button data-key="<?= $key; ?>"
+												data-id="<?= $arResult['ITEM']['ID']; ?>"
+												data-offerid="<?= $item['ID']; ?>"
 												class="product-size-link <?= $key == array_search($key, $sizesArray) ?
 													'selected' : ''; ?> product-size">
 
 									<?php
-										echo $item['PROPERTIES']['SIZES_SHOES']['VALUE'];
+										echo $item['PROPERTIES']['SIZES_' . $typeOfClothe]['VALUE'];
 									?>
 
 								</button>
@@ -142,7 +152,7 @@
 					<a href="<?= $arResult['ITEM']['DETAIL_PAGE_URL']; ?>" class="btn
 						btn-outline-secondary">Детали
 					</a>
-					<a data-id="<?= $arResult['ITEM']['ID']; ?>" class="btn
+					<a class="btn
 					btn-primary
 					add-to-cart"><i
 							class="fa
@@ -154,34 +164,48 @@
 		</div>
 		<script>
 			BX.ready(function () {
-				checkingOffers();
+
+				let offers = document.querySelectorAll('.offers-data');
+				const offersData = [];
+				offers.forEach((el, index) => {
+
+					offersData[index] = [];
+					offersData[index]['color'] = el.dataset.color;
+					offersData[index]['size'] = el.dataset.size;
+					offersData[index]['offerid'] = el.dataset.offerid;
+					offersData[index]['id'] = el.dataset.id;
+					offersData[index]['price'] = el.dataset.price;
+				});
+
+				// checkingOffers();
 				$('.product-color-link').click(function (e) {
 					e.preventDefault();
 					e.stopPropagation();
-					$(this).find('.add-to-cart').attr('data-id', $(this).attr('data-id'));
-					$(this).siblings().find('.product-color').removeClass('selected');
-					$(this).find('img').addClass('selected');
-					let dataKey = $(this).attr('data-key');
-					$(this).parent().parent().find('.price').addClass('d-none');
-					$(this).parent().parent().parent().find('.product-img').addClass('d-none');
-					$(this).parent().parent().parent().find('.' + dataKey).removeClass('d-none');
+					$(this).parent().parent().find('.add-to-cart').data('offerid', $(this).data('offerid'));
+
+				});
+				$('.product-size-link').click(function (e) {
+					e.preventDefault();
+					e.stopPropagation();
+					$(this).parent().parent().find('.add-to-cart').data('offerid', $(this).data('offerid'));
+					$(this).parent().parent().find('.product-color-link').filter(function () {
+						$(this).
+					})
 				});
 
-				function checkingOffers() {
-					$('.product-size-link').filter((el)
-					{
-						inArray(el.attr())
-					}
-				).
-					attr('disabled', '');
-				}
+				// function checkingOffers() {
+				// 	$('.product-size-link').filter(function (i, el) {
+				// 			$.inArray(this.attr())
+				// 		}
+				// 	).attr('disabled', '');
+				// }
 
 				$('.add-to-cart').click(function (e) {
 					e.preventDefault();
 					e.stopPropagation();
 					let ajax = $.ajax({
 						type: 'GET',
-						url: location.pathname + `?action=ADD2BASKET&id=${$(this).attr('data-id')}`,
+						url: location.pathname + `?action=ADD2BASKET&id=${$(this).attr('data-offerid')}`,
 						data: {
 							ajax_basket: 'Y',
 							quantity: '1'

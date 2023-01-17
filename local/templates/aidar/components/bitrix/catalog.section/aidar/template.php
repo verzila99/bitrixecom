@@ -202,247 +202,245 @@
 
 			//region Description
 			if (!empty($arResult['DESCRIPTION'])) {
-		?>
-		<div class="col">
-			<div class="box">
-				<h1><?= $arResult['NAME']; ?></h1>
-				<p><?= $arResult['DESCRIPTION']; ?>.
-				</p>
-			</div>
-		</div>
+				?>
+				<div class="col">
+					<div class="box">
+						<h1><?= $arResult['NAME']; ?></h1>
+						<p><?= $arResult['DESCRIPTION']; ?>.
+						</p>
+					</div>
+				</div>
 				<?php
 			}
 			//endregion
 		?>
-			<div class="col">
-				<div class="box info-bar">
-					<div class="row">
-						<div class="col-md-12 col-lg-4 products-showing">Showing <strong>12</strong> of
-							<strong>25</strong> products
-						</div>
-						<div class="col-md-12 col-lg-7 products-number-sort">
-							<form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
-								<div class="products-number"><strong>Show</strong>
-									<a href="#" class="btn btn-sm btn-primary">12</a>
-									<a href="#" class="btn btn-outline-secondary btn-sm">24</a>
-									<a href="#" class="btn btn-outline-secondary btn-sm">All</a>
-									<span>products</span></div>
-								<div class="products-sort-by mt-2 mt-lg-0"><strong>Сортировать по:</strong>
-									<select class="form-select"
-													id="bitrix-sort"
-													aria-label="Default select bitrix-sort">
-										<option value="SORT-ASC"<?= !$_GET['sort'] ? 'selected' : ''; ?>>По
-																																										 умолчанию
-										</option>
-										<option value="NAME-ASC"<?= $_GET['sort']=='name' &&
-										$_GET['method']== 'asc'? 'selected' :
-											'';
-										?>>Алфавиту от
-											 А до Я
-										</option>
-										<option value="NAME-DESC"<?= $_GET['sort']=='name' &&
-										$_GET['method']== 'desc'? 'selected'
-											: '';
-										?>>Алфавиту
-											 от Я до А
-										</option>
-										<option value="PROPERTY_PRICE-ASC"<?= $_GET['sort']=='catalog_PRICE_1' &&
+		<div class="col">
+			<div class="box info-bar">
+				<div class="row">
+					<div class="col-md-12 col-lg-4 products-showing">Показано <strong><?=
+								$arResult['NAV_RESULT']->nSelectedCount;
+							?></strong> из
+						<strong><?= $arResult['NAV_RESULT']->NavRecordCount;
+							?></strong>
+					</div>
+					<div class="col-md-12 col-lg-7 products-number-sort">
+						<form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
+							<div class="products-sort-by mt-2 mt-lg-0"><strong>Сортировать по:</strong>
+								<select class="form-select"
+												id="bitrix-sort"
+												aria-label="Default select bitrix-sort">
+									<option value="SORT-ASC"<?= !$_GET['sort'] ? 'selected' : ''; ?>>По
+																																									 умолчанию
+									</option>
+									<option value="NAME-ASC"<?= $_GET['sort'] == 'name' &&
+									$_GET['method'] == 'asc'
+										? 'selected'
+										:
+										'';
+									?>>Алфавиту от
+										 А до Я
+									</option>
+									<option value="NAME-DESC"<?= $_GET['sort'] == 'name' &&
+									$_GET['method'] == 'desc' ? 'selected'
+										: '';
+									?>>Алфавиту
+										 от Я до А
+									</option>
+									<option value="PROPERTY_PRICE-ASC"<?= $_GET['sort'] == 'catalog_PRICE_1' &&
 
-										$_GET['method']== 'asc'?
-											'selected'
-											: ''; ?>>По возрастанию цены
-										</option>
-										<option value="PROPERTY_PRICE-DESC"<?= $_GET['sort']=='catalog_PRICE_1'
-										&&
-										$_GET['method']== 'desc'?
-											'selected'
-											: ''; ?>>По убыванию цены
-										</option>
-										<option value="TIMESTAMP_X-ASC"<?= $_GET['sort']=='timestamp_x' ? 'selected'
-											: ''; ?>>По дате обновления
-										</option>
-									</select>
-								</div>
-								<?php $server = $APPLICATION->GetCurPage(false);?>
-								<div style="display:none;">
-									<a id="SORT-ASC" href="<?= $server;?>">По умолчанию</a>
-									<a id="NAME-ASC" href="<?= $server;?>?sort=name&method=asc">Алфавиту от А до Я</a>
-									<a id="NAME-DESC" href="<?= $server;?>?sort=name&method=desc">Алфавиту от Я до А</a>
-									<a id="PROPERTY_PRICE-ASC" href="<?= $server;?>?sort=catalog_PRICE_1&method=asc">По
-																																																	 возрастанию цены</a>
-									<a id="PROPERTY_PRICE-DESC" href="<?= $server;?>?sort=catalog_PRICE_1&method=desc">По убыванию
-																																																		 цены</a>
-									<a id="TIMESTAMP_X-ASC" href="<?= $server;?>?sort=timestamp_x&method=desc">По дате
-																																														 обновления</a>
-								</div>
-							</form>
-						</div>
+									$_GET['method'] == 'asc' ?
+										'selected'
+										: ''; ?>>По возрастанию цены
+									</option>
+									<option value="PROPERTY_PRICE-DESC"<?= $_GET['sort'] == 'catalog_PRICE_1'
+									&&
+									$_GET['method'] == 'desc' ?
+										'selected'
+										: ''; ?>>По убыванию цены
+									</option>
+									<option value="TIMESTAMP_X-ASC"<?= $_GET['sort'] == 'timestamp_x' ? 'selected'
+										: ''; ?>>По дате обновления
+									</option>
+								</select>
+							</div>
+							<?php
+								$server = $APPLICATION->GetCurPage(false); ?>
+							<div style="display:none;">
+								<a id="SORT-ASC" href="<?= $server; ?>">По умолчанию</a>
+								<a id="NAME-ASC" href="<?= $server; ?>?sort=name&method=asc">Алфавиту от А до Я</a>
+								<a id="NAME-DESC" href="<?= $server; ?>?sort=name&method=desc">Алфавиту от Я до А
+								</a>
+								<a id="PROPERTY_PRICE-ASC" href="<?= $server; ?>?sort=catalog_PRICE_1&method=asc">По
+																																																	возрастанию
+																																																	цены
+								</a>
+								<a id="PROPERTY_PRICE-DESC" href="<?= $server; ?>?sort=catalog_PRICE_1&method=desc">
+									По убыванию
+									цены
+								</a>
+								<a id="TIMESTAMP_X-ASC" href="<?= $server; ?>?sort=timestamp_x&method=desc">По дате
+																																														обновления
+								</a>
+							</div>
+						</form>
 					</div>
 				</div>
-				<script>
-					BX.ready(function(){
-						BX.bind(
-							BX('bitrix-sort'), 'change', function() {
-								let selected =  this.value;
-								BX(selected).click();
-							}
-						);
-					});
-				</script>
 			</div>
-		
-
-			<!-- items-container -->
-			<?php
-				if (!empty($arResult['ITEMS'])) {
-					$areaIds = array();
-
-					foreach ($arResult['ITEMS'] as $item) {
-						$uniqueId = $item['ID'] . '_' . md5($this->randString() . $component->getAction());
-						$areaIds[$item['ID']] = $this->GetEditAreaId($uniqueId);
-						$this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
-						$this->AddDeleteAction(
-							$uniqueId,
-							$item['DELETE_LINK'],
-							$elementDelete,
-							$elementDeleteParams
-						);
-					}
-					?>
-					<div class="row products" data-entity="items-row">
-
-						<?php
-							foreach ($arResult['ITEMS'] as $rowData) {
-								?>
-								<div class="col-lg-4 col-md-6">
-									<?php
-										$item = $rowData;
-										$APPLICATION->IncludeComponent(
-											'bitrix:catalog.item',
-											'aidar',
-											array(
-												'RESULT' => array(
-													'ITEM' => $item,
-													'AREA_ID' => $areaIds[$item['ID']],
-													'TYPE' => $rowData['TYPE'],
-													'BIG_LABEL' => 'N',
-													'BIG_DISCOUNT_PERCENT' => 'N',
-													'BIG_BUTTONS' => 'N',
-													'SCALABLE' => 'N'
-												),
-												'PARAMS' => $generalParams
-													+ array('SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']])
-											),
-											$component,
-											array('HIDE_ICONS' => 'Y')
-										); ?>
-								</div>
-								<?php
-							}
-						?>
-					</div>
-					<?php
-					unset($generalParams, $rowItems);
-				} else {
-					// load css for bigData/deferred load
-					$APPLICATION->IncludeComponent(
-						'bitrix:catalog.item',
-						'aidar',
-						array(),
-						$component,
-						array('HIDE_ICONS' => 'Y')
-					);
-				}
-			?>
-			<!-- items-container -->
-			<?php
-
-				//region LazyLoad Button
-				if ($showLazyLoad) {
-					?>
-					<div class="text-center mb-4" data-entity="lazy-<?= $containerName ?>">
-						<button type="button"
-										class="btn btn-primary btn-md"
-										style="margin: 15px;"
-										data-use="show-more-<?= $navParams['NavNum'] ?>">
-							<?= $arParams['MESS_BTN_LAZY_LOAD'] ?>
-						</button>
-					</div>
-					<?php
-				}
-				//endregion
-
-				//region Pagination
-				if ($showBottomPager) {
-					?>
-					<div class="row mb-4">
-						<div class="col text-center" data-pagination-num="<?= $navParams['NavNum'] ?>">
-							<!-- pagination-container -->
-							<?= $arResult['NAV_STRING'] ?>
-							<!-- pagination-container -->
-						</div>
-					</div>
-					<?php
-				}
-				//endregion
-
-				$signer = new Signer;
-				$signedTemplate = $signer->sign($templateName, 'catalog.section');
-				$signedParams = $signer->sign(
-					base64_encode(serialize($arResult['ORIGINAL_PARAMETERS'])),
-					'catalog.section'
-				);
-			?>
-			<script>
-				BX.message({
-					BTN_MESSAGE_BASKET_REDIRECT: '<?=GetMessageJS(
-						'CT_BCS_CATALOG_BTN_MESSAGE_BASKET_REDIRECT'
-					)?>',
-					BASKET_URL: '<?=$arParams['BASKET_URL']?>',
-					ADD_TO_BASKET_OK: '<?=GetMessageJS('ADD_TO_BASKET_OK')?>',
-					TITLE_ERROR: '<?=GetMessageJS('CT_BCS_CATALOG_TITLE_ERROR')?>',
-					TITLE_BASKET_PROPS: '<?=GetMessageJS('CT_BCS_CATALOG_TITLE_BASKET_PROPS')?>',
-					TITLE_SUCCESSFUL: '<?=GetMessageJS('ADD_TO_BASKET_OK')?>',
-					BASKET_UNKNOWN_ERROR: '<?=GetMessageJS('CT_BCS_CATALOG_BASKET_UNKNOWN_ERROR')?>',
-					BTN_MESSAGE_SEND_PROPS: '<?=GetMessageJS('CT_BCS_CATALOG_BTN_MESSAGE_SEND_PROPS')?>',
-					BTN_MESSAGE_CLOSE: '<?=GetMessageJS('CT_BCS_CATALOG_BTN_MESSAGE_CLOSE')?>',
-					BTN_MESSAGE_CLOSE_POPUP: '<?=GetMessageJS('CT_BCS_CATALOG_BTN_MESSAGE_CLOSE_POPUP')?>',
-					COMPARE_MESSAGE_OK: '<?=GetMessageJS('CT_BCS_CATALOG_MESS_COMPARE_OK')?>',
-					COMPARE_UNKNOWN_ERROR: '<?=GetMessageJS('CT_BCS_CATALOG_MESS_COMPARE_UNKNOWN_ERROR')?>',
-					COMPARE_TITLE: '<?=GetMessageJS('CT_BCS_CATALOG_MESS_COMPARE_TITLE')?>',
-					PRICE_TOTAL_PREFIX: '<?=GetMessageJS('CT_BCS_CATALOG_PRICE_TOTAL_PREFIX')?>',
-					RELATIVE_QUANTITY_MANY: '<?=CUtil::JSEscape(
-						$arParams['MESS_RELATIVE_QUANTITY_MANY']
-					)?>',
-					RELATIVE_QUANTITY_FEW: '<?=CUtil::JSEscape($arParams['MESS_RELATIVE_QUANTITY_FEW'])?>',
-					BTN_MESSAGE_COMPARE_REDIRECT: '<?=GetMessageJS(
-						'CT_BCS_CATALOG_BTN_MESSAGE_COMPARE_REDIRECT'
-					)?>',
-					BTN_MESSAGE_LAZY_LOAD: '<?=CUtil::JSEscape($arParams['MESS_BTN_LAZY_LOAD'])?>',
-					BTN_MESSAGE_LAZY_LOAD_WAITER: '<?=GetMessageJS(
-						'CT_BCS_CATALOG_BTN_MESSAGE_LAZY_LOAD_WAITER'
-					)?>',
-					SITE_ID: '<?=CUtil::JSEscape($component->getSiteId())?>'
-				});
-				var <?=$obName?> = new JCCatalogSectionComponent({
-					siteId: '<?=CUtil::JSEscape($component->getSiteId())?>',
-					componentPath: '<?=CUtil::JSEscape($componentPath)?>',
-					navParams: <?=CUtil::PhpToJSObject($navParams)?>,
-					deferredLoad: false, // enable it for deferred load
-					initiallyShowHeader: '<?=!empty($arResult['ITEM_ROWS'])?>',
-					bigData: <?=CUtil::PhpToJSObject($arResult['BIG_DATA'])?>,
-					lazyLoad: !!'<?=$showLazyLoad?>',
-					loadOnScroll: !!'<?=($arParams['LOAD_ON_SCROLL'] === 'Y')?>',
-					template: '<?=CUtil::JSEscape($signedTemplate)?>',
-					ajaxId: '<?=CUtil::JSEscape($arParams['AJAX_ID'])?>',
-					parameters: '<?=CUtil::JSEscape($signedParams)?>',
-					container: '<?=$containerName?>'
-				});
-			</script>
-
 
 		</div>
+
+
+		<!-- items-container -->
+		<?php
+			if (!empty($arResult['ITEMS'])) {
+				$areaIds = array();
+
+				foreach ($arResult['ITEMS'] as $item) {
+					$uniqueId = $item['ID'] . '_' . md5($this->randString() . $component->getAction());
+					$areaIds[$item['ID']] = $this->GetEditAreaId($uniqueId);
+					$this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
+					$this->AddDeleteAction(
+						$uniqueId,
+						$item['DELETE_LINK'],
+						$elementDelete,
+						$elementDeleteParams
+					);
+				}
+				?>
+				<div class="row products" data-entity="items-row">
+
+					<?php
+						foreach ($arResult['ITEMS'] as $rowData) {
+							?>
+							<div class="col-lg-4 col-md-6">
+								<?php
+									$item = $rowData;
+									$APPLICATION->IncludeComponent(
+										'bitrix:catalog.item',
+										'aidar',
+										array(
+											'RESULT' => array(
+												'ITEM' => $item,
+												'AREA_ID' => $areaIds[$item['ID']],
+												'TYPE' => $rowData['TYPE'],
+												'BIG_LABEL' => 'N',
+												'BIG_DISCOUNT_PERCENT' => 'N',
+												'BIG_BUTTONS' => 'N',
+												'SCALABLE' => 'N'
+											),
+											'PARAMS' => $generalParams
+												+ array('SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']])
+										),
+										$component,
+										array('HIDE_ICONS' => 'Y')
+									); ?>
+							</div>
+							<?php
+						}
+					?>
+				</div>
+				<?php
+				unset($generalParams, $rowItems);
+			} else {
+				// load css for bigData/deferred load
+				$APPLICATION->IncludeComponent(
+					'bitrix:catalog.item',
+					'aidar',
+					array(),
+					$component,
+					array('HIDE_ICONS' => 'Y')
+				);
+			}
+		?>
+		<!-- items-container -->
+		<?php
+
+			//region LazyLoad Button
+			if ($showLazyLoad) {
+				?>
+				<div class="text-center mb-4" data-entity="lazy-<?= $containerName ?>">
+					<button type="button"
+									class="btn btn-primary btn-md"
+									style="margin: 15px;"
+									data-use="show-more-<?= $navParams['NavNum'] ?>">
+						<?= $arParams['MESS_BTN_LAZY_LOAD'] ?>
+					</button>
+				</div>
+				<?php
+			}
+			//endregion
+
+			//region Pagination
+			if ($showBottomPager) {
+				?>
+				<div class="row mb-4">
+					<div class="col text-center" data-pagination-num="<?= $navParams['NavNum'] ?>">
+						<!-- pagination-container -->
+						<?= $arResult['NAV_STRING'] ?>
+						<!-- pagination-container -->
+					</div>
+				</div>
+				<?php
+			}
+			//endregion
+
+			$signer = new Signer;
+			$signedTemplate = $signer->sign($templateName, 'catalog.section');
+			$signedParams = $signer->sign(
+				base64_encode(serialize($arResult['ORIGINAL_PARAMETERS'])),
+				'catalog.section'
+			);
+		?>
+		<script>
+			BX.message({
+				BTN_MESSAGE_BASKET_REDIRECT: '<?=GetMessageJS(
+					'CT_BCS_CATALOG_BTN_MESSAGE_BASKET_REDIRECT'
+				)?>',
+				BASKET_URL: '<?=$arParams['BASKET_URL']?>',
+				ADD_TO_BASKET_OK: '<?=GetMessageJS('ADD_TO_BASKET_OK')?>',
+				TITLE_ERROR: '<?=GetMessageJS('CT_BCS_CATALOG_TITLE_ERROR')?>',
+				TITLE_BASKET_PROPS: '<?=GetMessageJS('CT_BCS_CATALOG_TITLE_BASKET_PROPS')?>',
+				TITLE_SUCCESSFUL: '<?=GetMessageJS('ADD_TO_BASKET_OK')?>',
+				BASKET_UNKNOWN_ERROR: '<?=GetMessageJS('CT_BCS_CATALOG_BASKET_UNKNOWN_ERROR')?>',
+				BTN_MESSAGE_SEND_PROPS: '<?=GetMessageJS('CT_BCS_CATALOG_BTN_MESSAGE_SEND_PROPS')?>',
+				BTN_MESSAGE_CLOSE: '<?=GetMessageJS('CT_BCS_CATALOG_BTN_MESSAGE_CLOSE')?>',
+				BTN_MESSAGE_CLOSE_POPUP: '<?=GetMessageJS('CT_BCS_CATALOG_BTN_MESSAGE_CLOSE_POPUP')?>',
+				COMPARE_MESSAGE_OK: '<?=GetMessageJS('CT_BCS_CATALOG_MESS_COMPARE_OK')?>',
+				COMPARE_UNKNOWN_ERROR: '<?=GetMessageJS('CT_BCS_CATALOG_MESS_COMPARE_UNKNOWN_ERROR')?>',
+				COMPARE_TITLE: '<?=GetMessageJS('CT_BCS_CATALOG_MESS_COMPARE_TITLE')?>',
+				PRICE_TOTAL_PREFIX: '<?=GetMessageJS('CT_BCS_CATALOG_PRICE_TOTAL_PREFIX')?>',
+				RELATIVE_QUANTITY_MANY: '<?=CUtil::JSEscape(
+					$arParams['MESS_RELATIVE_QUANTITY_MANY']
+				)?>',
+				RELATIVE_QUANTITY_FEW: '<?=CUtil::JSEscape($arParams['MESS_RELATIVE_QUANTITY_FEW'])?>',
+				BTN_MESSAGE_COMPARE_REDIRECT: '<?=GetMessageJS(
+					'CT_BCS_CATALOG_BTN_MESSAGE_COMPARE_REDIRECT'
+				)?>',
+				BTN_MESSAGE_LAZY_LOAD: '<?=CUtil::JSEscape($arParams['MESS_BTN_LAZY_LOAD'])?>',
+				BTN_MESSAGE_LAZY_LOAD_WAITER: '<?=GetMessageJS(
+					'CT_BCS_CATALOG_BTN_MESSAGE_LAZY_LOAD_WAITER'
+				)?>',
+				SITE_ID: '<?=CUtil::JSEscape($component->getSiteId())?>'
+			});
+			var <?=$obName?> = new JCCatalogSectionComponent({
+				siteId: '<?=CUtil::JSEscape($component->getSiteId())?>',
+				componentPath: '<?=CUtil::JSEscape($componentPath)?>',
+				navParams: <?=CUtil::PhpToJSObject($navParams)?>,
+				deferredLoad: false, // enable it for deferred load
+				initiallyShowHeader: '<?=!empty($arResult['ITEM_ROWS'])?>',
+				bigData: <?=CUtil::PhpToJSObject($arResult['BIG_DATA'])?>,
+				lazyLoad: !!'<?=$showLazyLoad?>',
+				loadOnScroll: !!'<?=($arParams['LOAD_ON_SCROLL'] === 'Y')?>',
+				template: '<?=CUtil::JSEscape($signedTemplate)?>',
+				ajaxId: '<?=CUtil::JSEscape($arParams['AJAX_ID'])?>',
+				parameters: '<?=CUtil::JSEscape($signedParams)?>',
+				container: '<?=$containerName?>'
+			});
+		</script>
+
+
 	</div>
+</div>
 </div> <?php
 	//end wrapper?>
 <!-- component-end -->

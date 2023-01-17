@@ -1,4 +1,4 @@
-<?
+<?php
 
 	if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 		die();
@@ -106,37 +106,36 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 offer mb-3 mb-lg-0">
-					<a href="#" class="btn btn-success btn-sm">Offer
-																										 of the day
+					<a href="#" class="btn btn-success btn-sm">Предложение дня
 					</a>
-					<a href="#" class="ml-1">Get flat 35% off on orders over
-																	 $50!
+					<a href="#" class="ml-1">Получи скидку 35% при зааказе от 5000 рублей!
 					</a>
 				</div>
 				<div class="col-lg-6 text-center text-lg-right">
 					<ul class="menu list-inline mb-0">
-						<?$APPLICATION->IncludeComponent(
-							"bitrix:sale.basket.basket.line",
-							"auth",
-							Array(
-								"HIDE_ON_BASKET_PAGES" => "N",
-								"PATH_TO_AUTHORIZE" => SITE_DIR."login/",
-								"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
-								"PATH_TO_ORDER" => SITE_DIR."personal/order/make/",
-								"PATH_TO_PERSONAL" => SITE_DIR."personal/",
-								"PATH_TO_PROFILE" => SITE_DIR."personal/",
-								"PATH_TO_REGISTER" => SITE_DIR."register/",
-								"POSITION_FIXED" => "N",
-								"SHOW_AUTHOR" => "Y",
-								"SHOW_EMPTY_VALUES" => "Y",
-								"SHOW_NUM_PRODUCTS" => "N",
-								"SHOW_PERSONAL_LINK" => "Y",
-								"SHOW_PRODUCTS" => "N",
-								"SHOW_REGISTRATION" => "Y",
-								"SHOW_TOTAL_PRICE" => "N"
-							)
-						);?>
-						
+						<?php
+							$APPLICATION->IncludeComponent(
+								"bitrix:sale.basket.basket.line",
+								"auth",
+								array(
+									"HIDE_ON_BASKET_PAGES" => "N",
+									"PATH_TO_AUTHORIZE" => SITE_DIR . "login/",
+									"PATH_TO_BASKET" => SITE_DIR . "personal/cart/",
+									"PATH_TO_ORDER" => SITE_DIR . "personal/order/make/",
+									"PATH_TO_PERSONAL" => SITE_DIR . "personal/",
+									"PATH_TO_PROFILE" => SITE_DIR . "personal/",
+									"PATH_TO_REGISTER" => SITE_DIR . "register/",
+									"POSITION_FIXED" => "N",
+									"SHOW_AUTHOR" => "Y",
+									"SHOW_EMPTY_VALUES" => "Y",
+									"SHOW_NUM_PRODUCTS" => "N",
+									"SHOW_PERSONAL_LINK" => "Y",
+									"SHOW_PRODUCTS" => "N",
+									"SHOW_REGISTRATION" => "Y",
+									"SHOW_TOTAL_PRICE" => "N"
+								)
+							); ?>
+
 					</ul>
 				</div>
 			</div>
@@ -209,7 +208,7 @@
 						class="fa fa-shopping-cart"></i></a>
 			</div>
 			<div id="navigation" class="collapse navbar-collapse">
-				<?
+				<?php
 					$APPLICATION->IncludeComponent(
 						"bitrix:menu",
 						"top_menu",
@@ -241,22 +240,23 @@
 						<a
 							href="/personal/cart" class="btn btn-primary navbar-btn"><i
 								class="fa fa-shopping-cart"></i><span>
-								<?$APPLICATION->IncludeComponent(
-									"bitrix:sale.basket.basket.line",
-									"navbar",
-									Array(
-										"HIDE_ON_BASKET_PAGES" => "N",
-										"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
-										"POSITION_FIXED" => "N",
-										"SHOW_AUTHOR" => "N",
-										"SHOW_EMPTY_VALUES" => "Y",
-										"SHOW_NUM_PRODUCTS" => "Y",
-										"SHOW_PERSONAL_LINK" => "N",
-										"SHOW_PRODUCTS" => "N",
-										"SHOW_REGISTRATION" => "N",
-										"SHOW_TOTAL_PRICE" => "N"
-									)
-								);?></span></a>
+								<?php
+									$APPLICATION->IncludeComponent(
+										"bitrix:sale.basket.basket.line",
+										"navbar",
+										array(
+											"HIDE_ON_BASKET_PAGES" => "N",
+											"PATH_TO_BASKET" => SITE_DIR . "personal/cart/",
+											"POSITION_FIXED" => "N",
+											"SHOW_AUTHOR" => "N",
+											"SHOW_EMPTY_VALUES" => "Y",
+											"SHOW_NUM_PRODUCTS" => "Y",
+											"SHOW_PERSONAL_LINK" => "N",
+											"SHOW_PRODUCTS" => "N",
+											"SHOW_REGISTRATION" => "N",
+											"SHOW_TOTAL_PRICE" => "N"
+										)
+									); ?></span></a>
 					</div>
 				</div>
 			</div>
@@ -278,3 +278,20 @@
 </header>
 <div id="all">
 	<div id="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<!-- breadcrumb-->
+					<?php
+						$APPLICATION->IncludeComponent(
+							"bitrix:breadcrumb",
+							"aidar",
+							array(
+								"PATH" => "",
+								"SITE_ID" => "s1",
+								"START_FROM" => "0",
+							),
+							false
+						); ?>
+				</div>
+			</div>

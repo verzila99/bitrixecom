@@ -35,7 +35,7 @@
 <div class="row mb-4 bx-<?= $arParams["TEMPLATE_THEME"] ?>">
 	<?
 		if ($isFilter || $isSidebar): ?>
-			<div class="col-lg-3 col-md-4 col-sm-5
+			<div class="box col-lg-3 col-md-4 col-sm-5
 			<?= (isset($arParams['FILTER_HIDE_ON_MOBILE']) && $arParams['FILTER_HIDE_ON_MOBILE'] === 'Y'
 				? ' d-none d-sm-block' : '') ?>">
 				<?
@@ -44,7 +44,7 @@
 						<div class="bx-sidebar-block">
 							<?
 								$APPLICATION->IncludeComponent(
-									"bitrix:catalog.smart.filter", "bootstrap_v4", array(
+									"bitrix:catalog.smart.filter", "aidar", array(
 									"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 									"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 									"SECTION_ID" => $arCurSection['ID'],
@@ -121,14 +121,14 @@
 			}
 			if ($_GET["sort"] == "name" ||
 				$_GET["sort"] == "catalog_PRICE_1" || // После catalog_PRICE_ указываете ID вашей базовой цены (Магазин → Настройки → Типы цен, цена с кодом "BASE"). В моем случае это ID = 1
-				$_GET["sort"] == "timestamp_x"){
+				$_GET["sort"] == "timestamp_x") {
 				$arParams["ELEMENT_SORT_FIELD"] = $_GET["sort"];
 				$arParams["ELEMENT_SORT_ORDER"] = $_GET["method"];
 			};
 
 			$intSectionID = $APPLICATION->IncludeComponent(
 				"bitrix:catalog.section",
-				"aidar",
+				"bootstrap_v4",
 				array(
 					"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 					"IBLOCK_ID" => $arParams["IBLOCK_ID"],
@@ -285,7 +285,7 @@
 
 			$GLOBALS['CATALOG_CURRENT_SECTION_ID'] = $intSectionID;
 
-			
+
 		?>
 	</div>
 </div>

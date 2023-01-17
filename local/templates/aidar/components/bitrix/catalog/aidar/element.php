@@ -1,4 +1,5 @@
 <?
+
 	if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 		die();
 	}
@@ -32,7 +33,7 @@
 	$isSidebar = ($arParams['SIDEBAR_DETAIL_SHOW'] == 'Y' && !empty($arParams['SIDEBAR_PATH']));
 	$isSidebarLeft = isset($arParams['SIDEBAR_SECTION_POSITION']) && $arParams['SIDEBAR_SECTION_POSITION'] === 'left';
 ?>
-<div class="row bx-<?= $arParams['TEMPLATE_THEME'] ?>">
+<div class="container  bx-<?= $arParams['TEMPLATE_THEME'] ?>">
 	<div class='<?= ($isSidebar ? 'col-md-9 col-sm-8' : 'col') ?>'>
 		<?
 
@@ -253,7 +254,7 @@
 
 			$elementId = $APPLICATION->IncludeComponent(
 				'bitrix:catalog.element',
-				'bootstrap_v4',
+				'aidar',
 				$componentElementParams,
 				$component
 			);
@@ -481,7 +482,7 @@
 								<?
 									$APPLICATION->IncludeComponent(
 										'bitrix:catalog.section',
-										'bootstrap_v4',
+										'datail_page',
 										array(
 											'IBLOCK_TYPE' => $arParams['IBLOCK_TYPE'],
 											'IBLOCK_ID' => $arParams['IBLOCK_ID'],
@@ -645,7 +646,7 @@
 								<?
 									$APPLICATION->IncludeComponent(
 										'bitrix:catalog.products.viewed',
-										'bootstrap_v4',
+										'aidar',
 										array(
 											'IBLOCK_MODE' => 'single',
 											'IBLOCK_TYPE' => $arParams['IBLOCK_TYPE'],
@@ -771,24 +772,5 @@
 			}
 		?>
 	</div>
-	<?
-		if ($isSidebar): ?>
-			<div class='col-md-3 col-sm-4'>
-				<?
-					$APPLICATION->IncludeComponent(
-						'bitrix:main.include',
-						'',
-						array(
-							'AREA_FILE_SHOW' => 'file',
-							'PATH' => $arParams['SIDEBAR_PATH'],
-							'AREA_FILE_RECURSIVE' => 'N',
-							'EDIT_MODE' => 'html',
-						),
-						false,
-						array('HIDE_ICONS' => 'Y')
-					);
-				?>
-			</div>
-		<?
-		endif ?>
+
 </div>
