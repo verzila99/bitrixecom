@@ -124,7 +124,7 @@
 									"PATH_TO_ORDER" => SITE_DIR . "personal/order/make/",
 									"PATH_TO_PERSONAL" => SITE_DIR . "personal/",
 									"PATH_TO_PROFILE" => SITE_DIR . "personal/",
-									"PATH_TO_REGISTER" => SITE_DIR . "register/",
+									"PATH_TO_REGISTER" => SITE_DIR . "login/?register=yes&backurl=%2Fregister",
 									"POSITION_FIXED" => "N",
 									"SHOW_AUTHOR" => "Y",
 									"SHOW_EMPTY_VALUES" => "Y",
@@ -137,44 +137,6 @@
 							); ?>
 
 					</ul>
-				</div>
-			</div>
-		</div>
-		<div
-			id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true"
-			class="modal fade">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Customer login</h5>
-						<button type="button" data-dismiss="modal" aria-label="Close" class="close">
-							<span aria-hidden="true">×</span></button>
-					</div>
-					<div class="modal-body">
-						<form action="customer-orders.html" method="post">
-							<div class="form-group">
-								<input
-									id="email-modal" type="text" placeholder="email"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<input
-									id="password-modal" type="password" placeholder="password"
-									class="form-control">
-							</div>
-							<p class="text-center">
-								<button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in
-								</button>
-							</p>
-						</form>
-						<p class="text-center text-muted">Not registered yet?</p>
-						<p class="text-center text-muted">
-							<a href="register.html"><strong>Register
-																							now</strong></a>
-							! It is easy and done in 1 minute and gives you
-							access to special discounts and much more!
-						</p>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -197,12 +159,12 @@
 				<button
 					type="button" data-toggle="collapse" data-target="#navigation"
 					class="btn btn-outline-secondary navbar-toggler">
-					<span class="sr-only">Toggle navigation</span><i
+					<span class="sr-only">Меню</span><i
 						class="fa fa-align-justify"></i></button>
 				<button
 					type="button" data-toggle="collapse" data-target="#search"
 					class="btn btn-outline-secondary navbar-toggler">
-					<span class="sr-only">Toggle search</span><i
+					<span class="sr-only">Поиск</span><i
 						class="fa fa-search"></i></button>
 				<a href="basket.html" class="btn btn-outline-secondary navbar-toggler"><i
 						class="fa fa-shopping-cart"></i></a>
